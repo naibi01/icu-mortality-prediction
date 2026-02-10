@@ -110,8 +110,7 @@ elif page == "Prediction":
             st.warning(f"**Moderate Risk ({risk_percent:.1f}%)**\n\nConsider closer monitoring.")
         else:
             st.error(f"**High Risk ({risk_percent:.1f}%)**\n\nUrgent intervention may be required.")
-        st.divider()
-        st.subheader("Result")
+
         
 
 # PAGE: MODEL INFO
