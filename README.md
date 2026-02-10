@@ -6,9 +6,9 @@ A clinical decision-support tool designed to predict in-hospital mortality for I
 This project prioritizes **Patient Safety (Recall)** over aggregate accuracy. It uses a **Class-Weighted Logistic Regression** pipeline to ensure high-risk patients are not missed.
 
 ## Live Demo
-[(https://icu-mortality-prediction.streamlit.app)]
+(https://icu-mortality-prediction.streamlit.app)
 
-## 📊 Model Performance
+## Model Performance
 * **Recall (Sensitivity):** ~73% (Optimized to detect ~3 out of 4 mortality cases)
 * **Precision:** ~25% (Accepts higher false positive rate to function as an effective screening tool)
 * **Key Features:** Lactate, GCS Total, Ventilation Status, Systolic BP.
