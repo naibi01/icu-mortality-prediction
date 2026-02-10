@@ -113,13 +113,6 @@ elif page == "Prediction":
         st.divider()
         st.subheader("Result")
         
-        # Color-coded Risk Levels
-        if risk_percent < 20:
-            st.success(f"**Low Risk ({risk_percent:.1f}%)**\n\nPatient is likely stable.")
-        elif risk_percent < 50:
-            st.warning(f"**Moderate Risk ({risk_percent:.1f}%)**\n\n⚠️ Consider closer monitoring.")
-        else:
-            st.error(f"**High Risk ({risk_percent:.1f}%)**\n\n🚨 Urgent intervention may be required.")
 
 # PAGE: MODEL INFO
 elif page == "Model Info":
