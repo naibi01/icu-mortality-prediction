@@ -78,6 +78,38 @@ elif page == "Prediction":
         probability = model.predict_proba(input_data)[0][1]
         risk_percent = probability * 100
         
+        # --- CLINICAL SAFETY GUARDRAILS ---
+        # Override model if vitals are incompatible with life/stability
+        override_msg = ""
+        
+        if d1_sysbp_min > 220:
+            risk_percent = max(risk_percent, 90.0) # Force High Risk
+            override_msg = "⚠️ **CRITICAL ALERT:** Systolic BP > 220 mmHg indicates Hypertensive Crisis. Risk set to High."
+            
+        if d1_sysbp_min < 40:
+            risk_percent = max(risk_percent, 90.0) # Force High Risk
+            override_msg = "⚠️ **CRITICAL ALERT:** Systolic BP < 40 mmHg indicates Severe Shock. Risk set to High."
+
+        if d1_heartrate_max > 200:
+             risk_percent = max(risk_percent, 85.0)
+             override_msg = "⚠️ **CRITICAL ALERT:** Extreme Tachycardia (>200 bpm). Risk set to High."
+             
+        # ----------------------------------
+
+        st.divider()
+        st.subheader("Result")
+        
+        # Show Override Message if triggered
+        if override_msg:
+            st.error(override_msg)
+        
+        # Color-coded Risk Levels
+        if risk_percent < 20:
+            st.success(f"**Low Risk ({risk_percent:.1f}%)**\n\nPatient is likely stable.")
+        elif risk_percent < 50:
+            st.warning(f"**Moderate Risk ({risk_percent:.1f}%)**\n\nConsider closer monitoring.")
+        else:
+            st.error(f"**High Risk ({risk_percent:.1f}%)**\n\nUrgent intervention may be required.")
         st.divider()
         st.subheader("Result")
         
